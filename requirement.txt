@@ -1,0 +1,11 @@
+torch==2.0.0
+torchvision==0.15.1
+transformers==4.27.4
+datasets
+wandb
+rouge_score
+scikit-learn
+openpyxl
+sentencepiece
+protobuf==3.20.*
+torchmetrics==0.11.4
