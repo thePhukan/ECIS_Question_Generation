@@ -45,47 +45,47 @@ TEST_SUMMARY_ID = 1
 
 def transform_single_dialogsumm_file(file):
     
-    # result = {"sentence":[],"context":[],"question":[]}                                       # (Ct + Tr) 
-    # result = {"sentence":[],"question":[]}                                                    # (Ct)
-    # result = {"sentence":[],"context":[],"question":[], "video_title":[]}                     # (Ct + Tr + Vt)
-    # result = {"sentence":[],"video_title":[],"question":[]}                                   # (Ct + Vt)
-    # result = {"sentence":[],"image_caption":[],"question":[]}                                 # (Ct + Fc)
-    # result = {"sentence":[],"video_title":[],"image_caption":[],"question":[]}                # (Ct + Vt + Fc)  
-    # result = {"sentence":[],"context":[],"video_title":[],"image_caption":[],"question":[]}   # (Ct + Tr + Vt +Fc)              
-    result = {"sentence":[],"video_title":[],"question":[],"summary":[]}                        # (Ct + Vt + SUMM)
+    # result = {"sentence":[],"context":[],"question":[]}                                       # (Chapter Title, Transcript) 
+    # result = {"sentence":[],"question":[]}                                                    # (Chapter Title)
+    # result = {"sentence":[],"context":[],"question":[], "video_title":[]}                     # (Chapter Title, Video Title, Transcript)
+    # result = {"sentence":[],"video_title":[],"question":[]}                                   # (Chapter Title, Video Title)
+    # result = {"sentence":[],"image_caption":[],"question":[]}                                 # (Chapter Title, Frame Captions)
+    # result = {"sentence":[],"video_title":[],"image_caption":[],"question":[]}                # (Chapter Title, Video Title, Frame Captions)
+    # result = {"sentence":[],"context":[],"video_title":[],"image_caption":[],"question":[]}   # (Chapter Title, Transcript, Frame Captions, Video Title)              
+    result = {"sentence":[],"video_title":[],"question":[],"summary":[]}                        # (Chapter Title, Video Title, Summary)
     
     for i in range(len(file)):
         
         # print("\n")
-        result["sentence"].append(file[i]["sentence"])                                          # Chapter Title (Ct)
-        # result["context"].append(file[i]["context"])                                          # Transcript (Tr)
+        result["sentence"].append(file[i]["sentence"])                                          # Chapter Title (C)
+        # result["context"].append(file[i]["context"])                                          # Transcript (T)
         result["question"].append(file[i]["question"])                                          # Gold Question 
-        result["video_title"].append(file[i]["video_title"])                                    # Video Title (Vt)
-        # result["image_caption"].append(str(file[i]["image_caption"]))                         # Image Caption (Fc)
-        result["summary"].append(str(file[i]["summary"]))                                       # Summary(Fc + Tr) (SUMM)
+        result["video_title"].append(file[i]["video_title"])                                    # Video Title (V)
+        # result["image_caption"].append(str(file[i]["image_caption"]))                         # Image Caption (F)
+        result["summary"].append(str(file[i]["summary"]))                                       # Summary(F,T) (S)
 
     return Dataset.from_dict(result)
 
 def transform_test_file(file):
     
-    # result = {"sentence":[],"context":[],"question":[]}                                       # (Ct + Tr) 
-    # result = {"sentence":[],"question":[]}                                                    # (Ct)
-    # result = {"sentence":[],"context":[],"question":[], "video_title":[]}                     # (Ct + Tr + Vt)
-    # result = {"sentence":[],"video_title":[],"question":[]}                                   # (Ct + Vt)
-    # result = {"sentence":[],"image_caption":[],"question":[]}                                 # (Ct + Fc)
-    # result = {"sentence":[],"video_title":[],"image_caption":[],"question":[]}                # (Ct + Vt + Fc)  
-    # result = {"sentence":[],"context":[],"video_title":[],"image_caption":[],"question":[]}   # (Ct + Tr + Vt +Fc)              
-    result = {"sentence":[],"video_title":[],"question":[],"summary":[]}                        # (Ct + Vt + SUMM)
+    # result = {"sentence":[],"context":[],"question":[]}                                       # (Chapter Title, Transcript) 
+    # result = {"sentence":[],"question":[]}                                                    # (Chapter Title)
+    # result = {"sentence":[],"context":[],"question":[], "video_title":[]}                     # (Chapter Title, Video Title, Transcript)
+    # result = {"sentence":[],"video_title":[],"question":[]}                                   # (Chapter Title, Video Title)
+    # result = {"sentence":[],"image_caption":[],"question":[]}                                 # (Chapter Title, Frame Captions)
+    # result = {"sentence":[],"video_title":[],"image_caption":[],"question":[]}                # (Chapter Title, Video Title, Frame Captions)
+    # result = {"sentence":[],"context":[],"video_title":[],"image_caption":[],"question":[]}   # (Chapter Title, Transcript, Frame Captions, Video Title)              
+    result = {"sentence":[],"video_title":[],"question":[],"summary":[]}                        # (Chapter Title, Video Title, Summary)
     
     for i in range(len(file)):
         
         # print("\n")
-        result["sentence"].append(file[i]["sentence"])                                          # Chapter Title (Ct)
-        # result["context"].append(file[i]["context"])                                          # Transcript (Tr)
+        result["sentence"].append(file[i]["sentence"])                                          # Chapter Title (C)
+        # result["context"].append(file[i]["context"])                                          # Transcript (T)
         result["question"].append(file[i]["question"])                                          # Gold Question 
-        result["video_title"].append(file[i]["video_title"])                                    # Video Title (Vt)
-        # result["image_caption"].append(str(file[i]["image_caption"]))                         # Image Caption (Fc)
-        result["summary"].append(str(file[i]["summary"]))                                       # Summary(Fc + Tr) (SUMM)
+        result["video_title"].append(file[i]["video_title"])                                    # Video Title (V)
+        # result["image_caption"].append(str(file[i]["image_caption"]))                         # Image Caption (F)
+        result["summary"].append(str(file[i]["summary"]))                                       # Summary(F,T) (S)
 
  
     return Dataset.from_dict(result)
@@ -181,14 +181,14 @@ for i in range(len(questions)):
         questions[i] = split_text
 
     
-    # dataset_full.append({"sentence":titles[i],"context": str(context[i]),"question":questions[i][0]})                                                                         # (Ct + Tr)
-    # dataset_full.append({"sentence":titles[i],"question":questions[i][0]})                                                                                                    # (Ct)
-    # # dataset_full.append({"sentence":titles[i],"question":questions[i][0], "video_title": video_titles[i]})                                                                  # (Ct + Vt)
-    # dataset_full.append({"sentence":titles[i],"question":questions[i][0], "image_caption": image_captions[i]})                                                                # (Ct + Fc)
-    # dataset_full.append({"sentence":titles[i],"question":questions[i][0], "image_caption": image_captions[i], "video_title": video_titles[i]})                                # (Ct + Fc + Vt)
-    # dataset_full.append({"sentence":titles[i],"context": str(context[i]),"question":questions[i][0], "video_title": video_titles[i]})                                         # (Ct + Tr + Vt)
-    # dataset_full.append({"sentence":titles[i],"context": str(context[i]),"question":questions[i][0], "video_title": video_titles[i], "image_caption": image_captions[i]})     # (Ct + Tr + Vt + Fc)
-    dataset_full.append({"sentence":titles[i],"summary": str(summaries[i]),"question":questions[i][0],"video_title": video_titles[i]})                                          # (Ct + Vt + SUMM)
+    # dataset_full.append({"sentence":titles[i],"context": str(context[i]),"question":questions[i][0]})                                                                         # (Chapter Title, Transcript)
+    # dataset_full.append({"sentence":titles[i],"question":questions[i][0]})                                                                                                    # (Chapter Title)
+    # # dataset_full.append({"sentence":titles[i],"question":questions[i][0], "video_title": video_titles[i]})                                                                  # (Chapter Title, Video Title)
+    # dataset_full.append({"sentence":titles[i],"question":questions[i][0], "image_caption": image_captions[i]})                                                                # (Chapter Title, Frame Captions)
+    # dataset_full.append({"sentence":titles[i],"question":questions[i][0], "image_caption": image_captions[i], "video_title": video_titles[i]})                                # (Chapter Title, Video Title, Frame Captions)
+    # dataset_full.append({"sentence":titles[i],"context": str(context[i]),"question":questions[i][0], "video_title": video_titles[i]})                                         # (Chapter Title, Video Title, Transcript)
+    # dataset_full.append({"sentence":titles[i],"context": str(context[i]),"question":questions[i][0], "video_title": video_titles[i], "image_caption": image_captions[i]})     # (Chapter Title, Transcript, Frame Captions, Video Title)
+    dataset_full.append({"sentence":titles[i],"summary": str(summaries[i]),"question":questions[i][0],"video_title": video_titles[i]})                                          # (Chapter Title, Video Title, Summary)
  
 
 
@@ -220,23 +220,23 @@ max_target_length = 512 * 2
 
 def preprocess_function(examples):
 
-    # inputs = [doc for doc in examples["sentence"]]    # (Ct)
+    # inputs = [doc for doc in examples["sentence"]]    # (Chapter Title)
 
-    # inputs = [str(str(sent)+" "+str(con)) for (sent, con) in zip(examples["sentence"], examples["context"])]  # (Ct + Tr)
+    # inputs = [str(str(sent)+" "+str(con)) for (sent, con) in zip(examples["sentence"], examples["context"])]  # (Chapter Title, Transcript)
 
-    # inputs = [str(str(sent)+" "+str(v_title)) for (sent, v_title) in zip(examples["sentence"], examples["video_title"])]  # (Ct + Vt)
+    # inputs = [str(str(sent)+" "+str(v_title)) for (sent, v_title) in zip(examples["sentence"], examples["video_title"])]  # (Chapter Title, Video Title)
 
-    # inputs = [str(str(sent)+" "+str(img_cap)) for (sent, img_cap) in zip(examples["sentence"], examples["image_caption"])]    # (Ct + Fc)
+    # inputs = [str(str(sent)+" "+str(img_cap)) for (sent, img_cap) in zip(examples["sentence"], examples["image_caption"])]    # (Chapter Title, Frame Captions)
 
-    # inputs = [str(str(sent)+" "+str(v_title)+" "+str(img_cap)) for (sent, v_title, img_cap) in zip(examples["sentence"], examples["video_title"], examples["image_caption"])] # (Ct + Vt + Fc)
+    # inputs = [str(str(sent)+" "+str(v_title)+" "+str(img_cap)) for (sent, v_title, img_cap) in zip(examples["sentence"], examples["video_title"], examples["image_caption"])] # (Chapter Title, Video Title, Frame Captions)
 
-    # inputs = [str(str(sent)+" "+str(con)+" "+str(v_title)) for (sent, con, v_title) in zip(examples["sentence"], examples["context"], examples["video_title"])]   # (Ct + Tr + Vt)
+    # inputs = [str(str(sent)+" "+str(con)+" "+str(v_title)) for (sent, con, v_title) in zip(examples["sentence"], examples["context"], examples["video_title"])]   # (Chapter Title, Video Title, Transcript)
 
-    # inputs = [str(str(sent)+" "+str(con)+" "+str(img_cap)+" "+str(v_title)) for (sent, con, v_title, img_cap) in zip(examples["sentence"], examples["context"], examples["video_title"], examples["image_caption"])]  # (Ct + Tr + Fc + Vt)
+    # inputs = [str(str(sent)+" "+str(con)+" "+str(img_cap)+" "+str(v_title)) for (sent, con, v_title, img_cap) in zip(examples["sentence"], examples["context"], examples["video_title"], examples["image_caption"])]  # (Chapter Title, Transcript, Frame Captions, Video Title)
 
-    # inputs = [str(str(sent)+" "+str(img_cap)+" "+str(v_title)) for (sent, v_title, img_cap) in zip(examples["sentence"], examples["video_title"], examples["image_caption"])] # (Ct + Fc + Vt)
+    # inputs = [str(str(sent)+" "+str(img_cap)+" "+str(v_title)) for (sent, v_title, img_cap) in zip(examples["sentence"], examples["video_title"], examples["image_caption"])] # (Chapter Title, Frame Captions, Video Title)
 
-    inputs = [str(str(sent)+" "+str(v_title)+" "+str(summ)) for (sent, v_title, summ) in zip(examples["sentence"], examples["video_title"], examples["summary"])]   # (Ct + Vt + SUMM)
+    inputs = [str(str(sent)+" "+str(v_title)+" "+str(summ)) for (sent, v_title, summ) in zip(examples["sentence"], examples["video_title"], examples["summary"])]   # (Chapter Title, Video Title, Summary)
 
     model_inputs = tokenizer(inputs, max_length=max_input_length, truncation=True)
 
