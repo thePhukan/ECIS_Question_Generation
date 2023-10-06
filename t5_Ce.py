@@ -105,7 +105,7 @@ batch_size = 2 #4
 
 bert_model = "T5"
 path = "location of the dataset"
-config = "Vt_SUMM_inTok"+str(max_input_length)+"_bs_"+str(batch_size)
+config = "V_SUMM_inTok"+str(max_input_length)+"_bs_"+str(batch_size)
 filename_model= bert_model+"_ep_"+str(num_epochs)+"_OUT_1024_"+config
 
 print(filename_model)
