@@ -7,7 +7,6 @@ from transformers import GPT2Tokenizer,  GPTNeoForCausalLM, GPT2LMHeadModel,T5To
 import pandas as pd
 import os
 # os.environ['CUDA_VISIBLE_DEVICES'] = '-1' # For CPU
-# os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 os.environ['CUDA_VISIBLE_DEVICES'] = '4'
 # os.environ['WANDB_DISABLED']="true"
 from tqdm import tqdm
@@ -214,12 +213,12 @@ num_epochs = 50
 batch_size = 2 #4 
 
 bert_model = "T5"
-
-config = "CntCe_Vt_SUMM_inTok"+str(max_input_length)+"_bs_"+str(batch_size)
+path = "location of the dataset"
+config = "CC_V_SUMM_inTok"+str(max_input_length)+"_bs_"+str(batch_size)
 filename_model= bert_model+"_ep_"+str(num_epochs)+"_OUT_1024_"+config
 
 print(filename_model)
-wandb.init(save_code=True, name=filename_model, project="AAAI2024_Beyond_the_Surface")
+wandb.init(save_code=True, name=filename_model, project="VQG")
 
 MODEL_PATH_CHECKPOINT = path+"Model Path/"+filename_model+"_Loss_Checkpoints.pt"
 
