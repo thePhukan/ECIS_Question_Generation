@@ -11,8 +11,6 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 # os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 # os.environ['WANDB_DISABLED']="true"
 from tqdm import tqdm
-# !pip install transformers
-
 from transformers import GPT2Tokenizer,  GPTNeoForCausalLM, GPT2LMHeadModel,T5Tokenizer, T5Model,T5ForConditionalGeneration
 import pandas as pd
 import os
@@ -214,11 +212,11 @@ path = "Path to Dataset"
 
 bert_model = "BART"
 
-config = "CntCe_Vt_SUMM_inTok"+str(max_input_length)+"_bs_"+str(batch_size)
+config = "CC_V_SUMM_inTok"+str(max_input_length)+"_bs_"+str(batch_size)
 filename_model= bert_model+"_ep_"+str(num_epochs)+"_OUT_1024_"+config
 
 print(filename_model)
-wandb.init(save_code=True, name=filename_model, project="AAAI2024_Beyond_the_Surface")
+wandb.init(save_code=True, name=filename_model, project="VQG")
 
 MODEL_PATH_CHECKPOINT = path+"Model Path/"+filename_model+"_Loss_Checkpoints.pt"
 
