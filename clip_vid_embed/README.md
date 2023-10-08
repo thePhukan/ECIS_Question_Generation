@@ -1,0 +1,1 @@
+Place the extracted CLIP features here
