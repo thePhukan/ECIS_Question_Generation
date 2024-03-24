@@ -6,6 +6,6 @@ wandb
 rouge_score
 scikit-learn
 openpyxl
-sentencepiece
+sentencepiece==0.1.99
 protobuf==3.20.*
 torchmetrics==0.11.4
